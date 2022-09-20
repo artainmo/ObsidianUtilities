@@ -9,7 +9,8 @@ if (isset($_POST['tagToTitle'])) {
 
 if (isset($_POST['hideLink'])) {
 	$newLink = $_POST['textLink'];
-	$newLink = explode(':', $newLink);
+	$newLink = str_replace(["*", "#"], "", $newLink);
+	$newLink = explode(':', $newLink, 2);
 	$newLink = "[" . trim($newLink[0]) . "](" . trim($newLink[1]) . ")";
 }
 ?>
