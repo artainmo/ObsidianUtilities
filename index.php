@@ -1,9 +1,9 @@
 <?php 
 if (isset($_POST['tagToTitle'])) {
-	$newTitle = $_POST['tags'];
+	$newTitle = trim($_POST['tags']);
 	$newTitle = str_replace("#", "", $newTitle);
 	$newTitle = explode(' ', $newTitle);
-	sort($newTitle);
+	usort($newTitle, 'strnatcasecmp');
 	$newTitle = implode(', ', $newTitle);
 }
 
