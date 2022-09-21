@@ -69,7 +69,7 @@ if (isset($_POST['hideLink'])) {
 		<label><strong>Process blocks</strong> 
 			<br><em>(expects this notation: title: link\ntext)</em>
 			<br><em>(will hide link in title and resolve double new line problem)</em>
-			<br><em>(is able to handle multiple blocks and exspects \n\n between them)</em>
+			<br><em>(is able to handle multiple blocks and expects \n\n between them)</em>
 			<br><em>(automatically pastes to clipboard)</em>
 		</label>
 		<br/><br/>
