@@ -16,13 +16,18 @@ if (isset($_POST['tagToTitle'])) {
 }
 
 if (isset($_POST['processBlock'])) {
-	$newBlock = $_POST['block'];
-	//$newBlock = str_replace(["*", "#", '_'], "", $newBlock);
-	$newBlock = explode(PHP_EOL, $newBlock, 2);
-	$titleLink = explode(':', $newBlock[0], 2);
-	$titleLink = "[" . trim($titleLink[0]) . "](" . trim($titleLink[1]) . ")";
-	$newBlock = $titleLink . "\n" . $newBlock[1];
-	pasteToClipboard($newBlock);
+	$final = "";
+	$_POST['block'] = preg_split("/(\n\n){1,}|(\r\n\r\n){1,}/", trim($_POST['block']));
+	for($i=0; $i<count($_POST['block']); $i++) {
+		$newBlock = $_POST['block'][$i];
+		//$newBlock = str_replace(["*", "#", '_'], "", $newBlock);
+		$newBlock = explode(PHP_EOL, $newBlock, 2);
+		$titleLink = explode(':', $newBlock[0], 2);
+		$titleLink = "[" . trim($titleLink[0]) . "](" . trim($titleLink[1]) . ")";
+		$newBlock = $titleLink . "\n" . $newBlock[1];
+		$final = $final . $newBlock . "\n\n";
+	}
+	pasteToClipboard($final);
 }
 
 if (isset($_POST['hideLink'])) {
@@ -61,13 +66,14 @@ if (isset($_POST['hideLink'])) {
 <br>
 <div>
 	<form action="index.php" method="POST">
-		<label><strong>Process block</strong> 
+		<label><strong>Process blocks</strong> 
 			<br><em>(expects this notation: title: link\ntext)</em>
 			<br><em>(will hide link in title and resolve double new line problem)</em>
+			<br><em>(is able to handle multiple blocks and exspects \n\n between them)</em>
 			<br><em>(automatically pastes to clipboard)</em>
 		</label>
 		<br/><br/>
-		<textarea name="block" rows="18" cols="100" required><?php if (isset($newBlock)) { echo $newBlock; } ?></textarea>
+		<textarea name="block" rows="18" cols="100" required><?php if (isset($final)) { echo $final; } ?></textarea>
 		<br><br>
 		<button type="submit" name="processBlock">Submit</button>
 	</form>
