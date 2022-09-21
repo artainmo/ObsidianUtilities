@@ -1,9 +1,9 @@
 <?php 
 function pasteToClipboard($x) {
 	echo '<script type="text/javascript">' .
-			'navigator.clipboard.writeText("' .
+			'navigator.clipboard.writeText(`' .
 			$x .
-		 '");</script>';
+		 '`);</script>';
 }
 
 if (isset($_POST['tagToTitle'])) {
@@ -15,9 +15,19 @@ if (isset($_POST['tagToTitle'])) {
 	pasteToClipboard($newTitle);
 }
 
+if (isset($_POST['processBlock'])) {
+	$newBlock = $_POST['block'];
+	//$newBlock = str_replace(["*", "#", '_'], "", $newBlock);
+	$newBlock = explode(PHP_EOL, $newBlock, 2);
+	$titleLink = explode(':', $newBlock[0], 2);
+	$titleLink = "[" . trim($titleLink[0]) . "](" . trim($titleLink[1]) . ")";
+	$newBlock = $titleLink . "\n" . $newBlock[1];
+	pasteToClipboard($newBlock);
+}
+
 if (isset($_POST['hideLink'])) {
 	$newLink = $_POST['textLink'];
-	$newLink = str_replace(["*", "#"], "", $newLink);
+	//$newLink = str_replace(["*", "#"], "", $newLink);
 	$newLink = explode(':', $newLink, 2);
 	$newLink = "[" . trim($newLink[0]) . "](" . trim($newLink[1]) . ")";
 	pasteToClipboard($newLink);
@@ -51,8 +61,23 @@ if (isset($_POST['hideLink'])) {
 <br>
 <div>
 	<form action="index.php" method="POST">
-		<label><strong>Hide link within text</strong> 
+		<label><strong>Process block</strong> 
+			<br><em>(expects this notation: title: link\ntext)</em>
+			<br><em>(will hide link in title and resolve double new line problem)</em>
+			<br><em>(automatically pastes to clipboard)</em>
+		</label>
+		<br/><br/>
+		<textarea name="block" rows="18" cols="100" required><?php if (isset($newBlock)) { echo $newBlock; } ?></textarea>
+		<br><br>
+		<button type="submit" name="processBlock">Submit</button>
+	</form>
+</div>
+<br>
+<div>
+	<form action="index.php" method="POST">
+		<label><strong>Hide link within title</strong> 
 			<br><em>(expects this notation: title: link)</em>
+			<br><em>(transforms to this: [title](link)</em>
 			<br><em>(automatically pastes to clipboard)</em>
 		</label>
 		<br/><br/>
