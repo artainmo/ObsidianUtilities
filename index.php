@@ -1,4 +1,4 @@
-<?php 
+<?php
 function pasteToClipboard($x) {
 	echo '<script type="text/javascript">' .
 			'navigator.clipboard.writeText(`' .
@@ -53,43 +53,46 @@ if (isset($_POST['hideLink'])) {
 <h1>Obsidian utilities</h1><br>
 <div>
 	<form action="index.php" method="POST">
-		<label><strong>Transform tags to title</strong> 
+		<label><strong>Transform tags to title</strong>
 			<br><em>(expects this notation: #tag1 #tag2)</em>
 			<br><em>(automatically pastes to clipboard)</em>
 		</label>
 		<br/><br/>
-		<textarea name="tags" rows="6" cols="100" maxlength="500" required><?php if (isset($newTitle)) { echo $newTitle; } ?></textarea>
+		<textarea id="tagToTitle" name="tags" rows="6" cols="100" maxlength="500" required><?php if (isset($newTitle)) { echo $newTitle; } ?></textarea>
 		<br><br>
 		<button type="submit" name="tagToTitle">Submit</button>
+		<input type="button" onclick="document.getElementById('tagToTitle').value = '';" value="Clear">
 	</form>
 </div>
 <br>
 <div>
 	<form action="index.php" method="POST">
-		<label><strong>Process blocks</strong> 
+		<label><strong>Process blocks</strong>
 			<br><em>(expects this notation: title: link\ntext)</em>
 			<br><em>(will hide link in title and resolve double new line problem)</em>
 			<br><em>(is able to handle multiple blocks and expects \n\n between them)</em>
 			<br><em>(automatically pastes to clipboard)</em>
 		</label>
 		<br/><br/>
-		<textarea name="block" rows="18" cols="100" required><?php if (isset($final)) { echo $final; } ?></textarea>
+		<textarea id="processBlock" name="block" rows="18" cols="100" required><?php if (isset($final)) { echo $final; } ?></textarea>
 		<br><br>
 		<button type="submit" name="processBlock">Submit</button>
+		<input type="button" onclick="document.getElementById('processBlock').value = '';" value="Clear">
 	</form>
 </div>
 <br>
 <div>
 	<form action="index.php" method="POST">
-		<label><strong>Hide link within title</strong> 
+		<label><strong>Hide link within title</strong>
 			<br><em>(expects this notation: title: link)</em>
 			<br><em>(transforms to this: [title](link)</em>
 			<br><em>(automatically pastes to clipboard)</em>
 		</label>
 		<br/><br/>
-		<textarea name="textLink" rows="6" cols="100" maxlength="500" required><?php if (isset($newLink)) { echo $newLink; } ?></textarea>
+		<textarea id="hideLink" name="textLink" rows="6" cols="100" maxlength="500" required><?php if (isset($newLink)) { echo $newLink; } ?></textarea>
 		<br><br>
 		<button type="submit" name="hideLink">Submit</button>
+		<input type="button" onclick="document.getElementById('hideLink').value = '';" value="Clear">
 	</form>
 </div>
 
