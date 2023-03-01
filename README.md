@@ -1,6 +1,6 @@
 # ObsidianUtilities
 
-Specific utilities for transforming my notes to [obsidian](https://obsidian.md/)'s note-taking format
+Specific utilities for transforming my notes to [obsidian](https://obsidian.md/)'s note-taking format.
 
 ### Launch
 1. `make`
