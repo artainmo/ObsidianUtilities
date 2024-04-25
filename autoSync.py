@@ -20,8 +20,8 @@ while True:
         if ".git" in root:
             continue
         for filename in files:
-	    if "workspace.json" in filename:
-		continue
+            if "workspace.json" in filename:
+                continue
             path = os.path.join(root, filename)
             modified_time = os.path.getmtime(path)
             if modified_time != initial_times.get(path):
