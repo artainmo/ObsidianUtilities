@@ -16,7 +16,7 @@ for root, dirs, files in os.walk(directory):
 while True:
     time.sleep(600)  # Wait for 10 min before checking again
     for root, dirs, files in os.walk(directory):
-        if ".git" in root:
+        if ".git" or ".obsidian/workspace.json" in root:
             continue
         for filename in files:
             path = os.path.join(root, filename)
