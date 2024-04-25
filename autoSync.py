@@ -15,13 +15,16 @@ for root, dirs, files in os.walk(directory):
 # Continuously check for changes
 while True:
     time.sleep(600)  # Wait for 10 min before checking again
+    os.system('cd ..; git pull;')
     for root, dirs, files in os.walk(directory):
-        if ".git" or ".obsidian/workspace.json" in root:
+        if ".git" in root:
             continue
         for filename in files:
+	    if "workspace.json" in filename:
+		continue
             path = os.path.join(root, filename)
             modified_time = os.path.getmtime(path)
             if modified_time != initial_times.get(path):
                 print(f"{path} has been modified!")
-                os.system(f'cd ..; git pull; git add *; git commit -m "autosync"; git push')
+                os.system(f'cd ..; git add *; git commit -m "autosync"; git push')
                 initial_times[path] = modified_time

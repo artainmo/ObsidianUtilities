@@ -1,6 +1,7 @@
 # ObsidianUtilities
 
-Specific utilities for transforming my notes to [obsidian](https://obsidian.md/)'s note-taking format. Plus automatic synchronization, which will pull changes from obsidian's github repository before pushing changes made in local repository every 10min.
+Specific utilities for transforming my notes to [obsidian](https://obsidian.md/)'s note-taking format.<br>
+Plus automatic synchronization, which will pull changes from obsidian's github repository every 10min, and push changes made in local repository, if any, every 10min.
 
 ### Launch
 Transform notes:
