@@ -1,7 +1,9 @@
 import os
 import time
+import sys
 
 directory = "../"
+time_between_checks = sys.argv[1] if len(sys.argv) == 2 else time_between_checks = 600 # Wait for 10 min before checking again if no time specified in command line argument
 
 # Store the initial file modification times
 initial_times = {}
@@ -19,7 +21,7 @@ while True:
     changes = False
     current_files = { file:False for file in current_files }
     os.system('cd ..; git pull')
-    time.sleep(600)  # Wait for 10 min before checking again
+    time.sleep(time_between_checks)
     for root, dirs, files in os.walk(directory):
         if root != "../Obsidian":
             continue
@@ -34,7 +36,7 @@ while True:
                 print(f"\033[1;32m'{path[3:]}' has been modified!\033[0m") if initial_times.get(path) != None else print(f"\033[0;32m'{path[3:]}' has been created!\033[0m")
                 os.system(f'cd ..; git add "{path[3:]}"')
                 initial_times[path] = modified_time
-    for file, still_present in current_files.items():
+    for file, still_present in list(current_files.items()): # list() is used to create a copy of dictionnary allowing us to change it while looping over it
         if not still_present:
             print(f"\033[0;31m'{file[3:]}' has been removed!\033[0m")
             os.system(f'cd ..; git rm "{file[3:]}"')
