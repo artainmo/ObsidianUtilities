@@ -35,7 +35,7 @@ while True:
                 os.system(f'cd ..; git add "{path[3:]}"')
                 initial_times[path] = modified_time
     for file, still_present in current_files.items():
-        if !still_present:
+        if not still_present:
             os.system(f'cd ..; git rm "{file[3:]}"')
     if changes:
          os.system('cd ..; git pull; git commit -m "autosync"; git push')
