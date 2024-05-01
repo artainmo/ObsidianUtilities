@@ -31,12 +31,14 @@ while True:
                 # 'dict.get(unknownKey)' returns None when key is unknown while 'dict[unknownKey]' would create an execution error.
                 # Thus new files are considered as modified files who need to be pushed.
                 changes = True
-                print(f"\033[1;33m'{path[3:]}' has been modified!\033[0m") if initial_times.get(path) != None else print(f"\033[0;32m'{path[3:]}' has been created!\033[0m")
+                print(f"\033[1;32m'{path[3:]}' has been modified!\033[0m") if initial_times.get(path) != None else print(f"\033[0;32m'{path[3:]}' has been created!\033[0m")
                 os.system(f'cd ..; git add "{path[3:]}"')
                 initial_times[path] = modified_time
     for file, still_present in current_files.items():
         if not still_present:
+            print(f"\033[0;31m'{file[3:]}' has been removed!\033[0m")
             os.system(f'cd ..; git rm "{file[3:]}"')
+            del current_files[file]
     if changes:
          os.system('cd ..; git pull; git commit -m "autosync"; git push')
     
