@@ -11,4 +11,4 @@ Transform notes:
 Auto-sync:
 1. This 'ObsidianUtilities' repository expects to sit inside root of obsidian repository with obsidian repository containing an Obsidian folder where all the files lie without subfolders.
 2. `make sync`
-3. If wanting to specify time between synchronizations you can indicate it in seconds as a command like argument. For example `make sync 10`.
+3. If wanting to specify time between synchronizations you can indicate it in seconds as a command like argument. For example `make sync time=10`.
