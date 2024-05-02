@@ -38,6 +38,7 @@ while True:
                 initial_times[path] = modified_time
     for file, still_present in list(current_files.items()): # list() is used to create a copy of dictionnary allowing us to change it while looping over it
         if not still_present:
+            changes = True
             print(f"\033[0;31m'{file[3:]}' has been removed!\033[0m")
             os.system(f'cd ..; git rm "{file[3:]}"')
             del current_files[file]
