@@ -3,7 +3,7 @@ import time
 import sys
 
 directory = "../"
-time_between_checks = sys.argv[1] if len(sys.argv) == 2 else time_between_checks = 600 # Wait for 10 min before checking again if no time specified in command line argument
+time_between_checks = sys.argv[1] if len(sys.argv) == 2 else 600 # Wait for 10 min before checking again if no time specified in command line argument
 
 # Store the initial file modification times
 initial_times = {}
