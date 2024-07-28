@@ -5,6 +5,14 @@ import sys
 directory = "../"
 time_between_checks = int(sys.argv[1]) if len(sys.argv) == 2 else 600 # Wait for 10 min before checking again if no time specified in command line argument
 
+def pull():
+    res = os.system('cd ..; git pull')
+    if res == 256:
+        print('An error occured.')
+        print("Trying to fix it by deleting 'Obsidian/.obsidian/workspace.json'")
+        res = os.system('cd ..; rm Obsidian/.obsidian/workspace.json')
+        res = os.system('cd ..; git pull')
+
 # Store the initial file modification times
 initial_times = {}
 current_files = {}
@@ -20,7 +28,7 @@ for root, dirs, files in os.walk(directory):
 while True:
     changes = False
     current_files = { file:False for file in current_files }
-    os.system('cd ..; git pull')
+    pull()
     time.sleep(time_between_checks)
     for root, dirs, files in os.walk(directory):
         if root != "../Obsidian":
@@ -43,5 +51,6 @@ while True:
             os.system(f'cd ..; git rm "{file[3:]}"')
             del current_files[file]
     if changes:
-         os.system('cd ..; git pull; git commit -m "autosync"; git push')
+         pull()
+         os.system('cd ..; git commit -m "autosync"; git push')
     
