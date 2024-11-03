@@ -15,5 +15,5 @@ Auto-sync:
 3. If wanting to specify time between synchronizations you can indicate it in seconds as a command like argument. For example `make sync time=10`.
 
 Check duplicates in long list:
-1. `python check_duplicate_lines.py.py <filename>`
+1. `python check_duplicate_lines.py <filename>`
 2. You may want to verify if duplicates exist in music list for example `python check_duplicate_lines.py.py "../Obsidian/list,\ music.md"`
