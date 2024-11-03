@@ -28,7 +28,7 @@ def check_duplicate_lines_in_file(filename):
 if __name__ == "__main__":
     # Check if the user provided a filename argument
     if len(sys.argv) < 2:
-        print("Usage: python script.py <filename>")
+        print("Usage: python check_duplicate_lines.py <filename>")
     else:
         # Take the filename from the command-line argument
         filename = sys.argv[1]
