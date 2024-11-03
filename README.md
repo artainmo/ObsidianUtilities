@@ -16,4 +16,4 @@ Auto-sync:
 
 Check duplicates in long list:
 1. `python check_duplicate_lines.py <filename>`
-2. You may want to verify if duplicates exist in music list for example `python check_duplicate_lines.py.py "../Obsidian/list,\ music.md"`
+2. You may want to verify if duplicates exist in music list for example `python check_duplicate_lines.py "../Obsidian/list,\ music.md"`
