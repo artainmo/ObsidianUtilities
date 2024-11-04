@@ -17,7 +17,7 @@ def pull():
 initial_times = {}
 current_files = {}
 for root, dirs, files in os.walk(directory):
-    if root != "../Obsidian":
+    if root[0:11] != "../Obsidian" and root[0:14] != "../cloud_other":
         continue
     for filename in files:
         path = os.path.join(root, filename)
@@ -31,7 +31,7 @@ while True:
     pull()
     time.sleep(time_between_checks)
     for root, dirs, files in os.walk(directory):
-        if root != "../Obsidian":
+        if root[0:11] != "../Obsidian" and root[0:14] != "../cloud_other":
             continue
         for filename in files:
             path = os.path.join(root, filename)
